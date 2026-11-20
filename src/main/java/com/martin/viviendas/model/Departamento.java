@@ -1,6 +1,6 @@
 package com.martin.viviendas.model;
 
-public class Departamento extends Vivienda {
+public class Departamento extends Vivienda implements ConEstacionamiento {
     private Integer numeroPiso;
     private boolean alDia;
 
@@ -27,5 +27,24 @@ public class Departamento extends Vivienda {
 
     public void setAlDia(boolean alDia) {
         this.alDia = alDia;
+    }
+
+    @Override
+    public Double calcularCostoArriendo() {
+        Double costo = 180000.0;
+        if (!alDia) {
+            return costo * 1.15;
+        }
+        return costo;
+    }
+
+    @Override
+    public double getCostoArriendo() {
+        return calcularCostoArriendo();
+    }
+
+    @Override
+    public String getTipo() {
+        return "Departamento";
     }
 }

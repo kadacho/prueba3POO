@@ -1,0 +1,11 @@
+{
+  "casas": [
+    {
+      "tienePatio": true,
+      "codigoPropiedad": "123",
+      "superficie": 123.0,
+      "numeroHabitaciones": 123
+    }
+  ],
+  "departamentos": []
+}

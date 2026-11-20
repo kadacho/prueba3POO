@@ -1,14 +1,15 @@
 package com.martin.viviendas.controller;
 
 import com.martin.viviendas.model.Casa;
-import com.martin.viviendas.model.CreaViviendas;
 import com.martin.viviendas.model.Departamento;
 import com.martin.viviendas.model.Vivienda;
+import com.martin.viviendas.model.ViviendaStorage;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -32,26 +33,63 @@ public class AgregarVivienda implements Initializable {
 
     private ObservableList<Vivienda> listaViviendas;
 
-    public void setListaViviendas(ObservableList<Vivienda> lista) {
-        this.listaViviendas = lista;
+    public void setListaViviendas(ObservableList<Vivienda> listaViviendas) {
+        this.listaViviendas = listaViviendas;
     }
 
     @FXML
-    public Vivienda agregarVivienda() {
-        //vivienda
-        String tipo = viviendaTipo.getValue();
-        String codigo = txtCodigo.getText();
-        Double superficie = Double.parseDouble(txtSuperficie.getText());
-        Integer habitaciones = Integer.parseInt(txtHabitaciones.getText());
-        //casa
-        boolean tienePatio = "Si".equals(comboTienePatio.getValue());
-        //departamento
-        Integer numeroPiso = Integer.parseInt(txtPiso.getText());
-        boolean alDia = "Si".equals(comboAlDia.getValue());
+    public void agregarVivienda() {
+        try {
+            String tipo = viviendaTipo.getValue();
+            String codigo = txtCodigo.getText();
+            double superficie = Double.parseDouble(txtSuperficie.getText().trim());
+            int habitaciones = Integer.parseInt(txtHabitaciones.getText().trim());
+            boolean tienePatio = "Si".equals(comboTienePatio.getValue());
+            int numeroPiso = 0;
+            if ("Departamento".equals(tipo) && !txtPiso.getText().trim().isEmpty()) {
+                numeroPiso = Integer.parseInt(txtPiso.getText().trim());
+            }
+            boolean alDia = "Si".equals(comboAlDia.getValue());
+            cerrarVentana();
+            if ("Casa".equals(tipo)) {
+                listaViviendas.add(new Casa(codigo, superficie, habitaciones, tienePatio));
+            } else if ("Departamento".equals(tipo)) {
+                listaViviendas.add(new Departamento(codigo, superficie, habitaciones, numeroPiso, alDia));
+            }
+            ViviendaStorage.guardarViviendas(listaViviendas);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error");
+        }
 
-        CreaViviendas agregar = new CreaViviendas();
+    }
 
-        return agregar.crearVivienda(tipo, codigo, superficie, habitaciones, tienePatio, numeroPiso, alDia);
+
+    private void cerrarVentana() {
+        if (botonAgregar != null && botonAgregar.getScene() != null) {
+            botonAgregar.getScene().getWindow().hide();
+        }
+    }
+
+    private void actualizarCamposPorTipo(String tipo) {
+        boolean esCasa = "Casa".equals(tipo);
+        boolean esDepto = "Departamento".equals(tipo);
+
+        setVisibleManaged(comboTienePatio, esCasa);
+        if (!esCasa) {
+            comboTienePatio.setValue(null);
+        }
+
+        setVisibleManaged(comboAlDia, esDepto);
+        setVisibleManaged(txtPiso, esDepto);
+        if (!esDepto) {
+            comboAlDia.setValue(null);
+            txtPiso.clear();
+        }
+    }
+
+    private void setVisibleManaged(javafx.scene.Node node, boolean visible) {
+        node.setVisible(visible);
+        node.setManaged(visible);
     }
 
     @Override
@@ -59,5 +97,10 @@ public class AgregarVivienda implements Initializable {
         viviendaTipo.getItems().setAll("Casa", "Departamento");
         comboTienePatio.getItems().setAll("Si", "No");
         comboAlDia.getItems().setAll("Si", "No");
+
+        viviendaTipo.valueProperty().addListener((obs, oldVal, nuevoTipo) -> actualizarCamposPorTipo(nuevoTipo));
+        actualizarCamposPorTipo(null);
     }
+
+
 }

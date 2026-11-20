@@ -2,28 +2,33 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TextField?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21"
+<VBox alignment="CENTER" spacing="15.0" prefWidth="320.0"
+      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21"
       fx:controller="com.martin.viviendas.controller.AgregarVivienda">
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
     </padding>
 
-    <Label text="Formulario"/>
-    <ComboBox fx:id="viviendaTipo" promptText="Seleccionar tipo:"/>
-    <TextField fx:id="txtCodigo" promptText="Ingresar codigo"/>
+    <Label text="Formulario" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <ComboBox fx:id="viviendaTipo" promptText="Seleccionar tipo:" maxWidth="Infinity"/>
+    <TextField fx:id="txtCodigo" promptText="Ingresar código"/>
     <TextField fx:id="txtSuperficie" promptText="Ingresar superficie"/>
     <TextField fx:id="txtHabitaciones" promptText="Ingresar habitaciones"/>
 
-    <ComboBox fx:id="comboTienePatio" promptText="Tiene patio: "/>
+    <!-- Exclusivos de Casa -->
+    <ComboBox fx:id="comboTienePatio" promptText="Tiene patio:" maxWidth="Infinity"
+              visible="false" managed="false"/>
 
-    <ComboBox fx:id="comboAlDia" promptText="Está al día:"/>
-    <TextField fx:id="txtPiso" promptText="Piso del departamento:"/>
+    <!-- Exclusivos de Departamento -->
+    <ComboBox fx:id="comboAlDia" promptText="Está al día:" maxWidth="Infinity"
+              visible="false" managed="false"/>
+    <TextField fx:id="txtPiso" promptText="Piso del departamento:"
+               visible="false" managed="false"/>
 
-
-    <Button text="Agregar" fx:id="botonAgregar" onAction="#agregarVivienda"/>
+    <Button text="Agregar" fx:id="botonAgregar" onAction="#agregarVivienda" maxWidth="Infinity"/>
 </VBox>

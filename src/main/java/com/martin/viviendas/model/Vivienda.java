@@ -1,6 +1,6 @@
 package com.martin.viviendas.model;
 
-public abstract class Vivienda implements ConEstacionamiento {
+public abstract class Vivienda {
     private String codigoPropiedad;
     private Double superficie;
     private Integer numeroHabitaciones;
@@ -23,7 +23,9 @@ public abstract class Vivienda implements ConEstacionamiento {
     }
 
     public Double getSuperficie() {
-        return superficie;
+        if (superficie > 20 && superficie < 500)
+            return superficie;
+        throw new IllegalArgumentException();
     }
 
     public void setSuperficie(Double superficie) {
@@ -31,10 +33,31 @@ public abstract class Vivienda implements ConEstacionamiento {
     }
 
     public Integer getNumeroHabitaciones() {
-        return numeroHabitaciones;
+        if (numeroHabitaciones>1)
+            return numeroHabitaciones;
+        throw new IllegalArgumentException();
     }
 
     public void setNumeroHabitaciones(Integer numeroHabitaciones) {
         this.numeroHabitaciones = numeroHabitaciones;
+    }
+
+    public Double calcularCostoArriendo() {
+        return 0.0;
+    }
+
+    public String verificarCodigo() {
+        if (codigoPropiedad.isBlank()) {
+            return codigoPropiedad;
+        }
+        throw new IllegalArgumentException();
+    }
+
+    public double getCostoArriendo() {
+        return calcularCostoArriendo();
+    }
+
+    public String getTipo() {
+        return "Vivienda";
     }
 }

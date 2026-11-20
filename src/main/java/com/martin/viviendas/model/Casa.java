@@ -18,4 +18,23 @@ public class Casa extends Vivienda {
     public void setTienePatio(boolean tienePatio) {
         this.tienePatio = tienePatio;
     }
+
+    @Override
+    public Double calcularCostoArriendo() {
+        Double costo = 250000.0;
+        if (tienePatio) {
+            return costo * 1.1;
+        }
+        return costo;
+    }
+
+    @Override
+    public double getCostoArriendo() {
+        return calcularCostoArriendo();
+    }
+
+    @Override
+    public String getTipo() {
+        return "Casa";
+    }
 }
