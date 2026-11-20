@@ -3,16 +3,14 @@ package com.martin.viviendas.model;
 public class Departamento extends Vivienda {
     private Integer numeroPiso;
     private boolean alDia;
-    private boolean tieneEstacionamiento;
 
     public Departamento() {
     }
 
-    public Departamento(String codigoPropiedad, Integer superficie, Integer numeroHabitaciones, Integer numeroPiso, boolean alDia, boolean tieneEstacionamiento) {
+    public Departamento(String codigoPropiedad, Double superficie, Integer numeroHabitaciones, Integer numeroPiso, boolean alDia) {
         super(codigoPropiedad, superficie, numeroHabitaciones);
         this.numeroPiso = numeroPiso;
         this.alDia = alDia;
-        this.tieneEstacionamiento = tieneEstacionamiento;
     }
 
     public Integer getNumeroPiso() {
@@ -29,13 +27,5 @@ public class Departamento extends Vivienda {
 
     public void setAlDia(boolean alDia) {
         this.alDia = alDia;
-    }
-
-    public boolean isTieneEstacionamiento() {
-        return tieneEstacionamiento;
-    }
-
-    public void setTieneEstacionamiento(boolean tieneEstacionamiento) {
-        this.tieneEstacionamiento = tieneEstacionamiento;
     }
 }

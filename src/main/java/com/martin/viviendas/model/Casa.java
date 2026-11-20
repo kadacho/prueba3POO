@@ -6,7 +6,7 @@ public class Casa extends Vivienda {
     public Casa() {
     }
 
-    public Casa(String codigoPropiedad, Integer superficie, Integer numeroHabitaciones, boolean tienePatio) {
+    public Casa(String codigoPropiedad, Double superficie, Integer numeroHabitaciones, boolean tienePatio) {
         super(codigoPropiedad, superficie, numeroHabitaciones);
         this.tienePatio = tienePatio;
     }

@@ -1,14 +1,14 @@
 package com.martin.viviendas.model;
 
-public class Vivienda {
+public abstract class Vivienda implements ConEstacionamiento {
     private String codigoPropiedad;
-    private Integer superficie;
+    private Double superficie;
     private Integer numeroHabitaciones;
 
     public Vivienda() {
     }
 
-    public Vivienda(String codigoPropiedad, Integer superficie, Integer numeroHabitaciones) {
+    public Vivienda(String codigoPropiedad, Double superficie, Integer numeroHabitaciones) {
         this.codigoPropiedad = codigoPropiedad;
         this.superficie = superficie;
         this.numeroHabitaciones = numeroHabitaciones;
@@ -22,11 +22,11 @@ public class Vivienda {
         this.codigoPropiedad = codigoPropiedad;
     }
 
-    public Integer getSuperficie() {
+    public Double getSuperficie() {
         return superficie;
     }
 
-    public void setSuperficie(Integer superficie) {
+    public void setSuperficie(Double superficie) {
         this.superficie = superficie;
     }
 

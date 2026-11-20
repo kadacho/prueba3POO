@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21"
       fx:controller="com.martin.viviendas.controller.AgregarVivienda">
     <padding>
@@ -13,5 +14,16 @@
     </padding>
 
     <Label text="Formulario"/>
-    <ComboBox fx:id="viviendaTipo"/>
+    <ComboBox fx:id="viviendaTipo" promptText="Seleccionar tipo:"/>
+    <TextField fx:id="txtCodigo" promptText="Ingresar codigo"/>
+    <TextField fx:id="txtSuperficie" promptText="Ingresar superficie"/>
+    <TextField fx:id="txtHabitaciones" promptText="Ingresar habitaciones"/>
+
+    <ComboBox fx:id="comboTienePatio" promptText="Tiene patio: "/>
+
+    <ComboBox fx:id="comboAlDia" promptText="Está al día:"/>
+    <TextField fx:id="txtPiso" promptText="Piso del departamento:"/>
+
+
+    <Button text="Agregar" fx:id="botonAgregar" onAction="#agregarVivienda"/>
 </VBox>
